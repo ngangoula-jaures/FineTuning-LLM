@@ -70,19 +70,15 @@ model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto")
 
 # Création du pipeline de génération
 pipe = pipeline(
-    "text-generation", 
-    model=model, 
+    task = "text-generation",
+    model=model_id,
     tokenizer=tokenizer,
-    max_length=200,
-    temperature=0.7,
-    top_p=0.9,
-    repetition_penalty=1.15,
-    do_sample=True
+    device=0
 )
 
 # Test
-prompt = "What is supervised learning?"
-result = pipe(prompt)
+prompt = "What is backpropagation?"
+result = pipe(prompt, max_new_tokens=50)
 
 print(result[0]['generated_text'])
 ```
